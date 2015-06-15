@@ -98,6 +98,8 @@ AI.prototype.search = function(depth, alpha, beta, positions, cutoffs, isEnemy) 
 
               if (result.score < bestScore) {
                 bestScore = result.score;
+              }
+              if (bestEnemy === -1 || parseInt(value, 10) > bestEnemy[1]) {
                 bestEnemy = [position, parseInt(value,10)];
               }
               if (bestScore < alpha) {
@@ -193,17 +195,14 @@ AI.prototype.iterativeDeep = function() {
 
 AI.prototype.iterativeEnemy = function() {
   var start = (new Date()).getTime();
-  var depth = 0;
+  var depth = 1;
   var best;
-  do {
-    var newBest = this.search(depth, -10000, 10000, 0 ,0, true);
-    if (newBest.enemy == -1) {
-      break;
-    } else {
-      best = newBest;
-    }
-    depth++;
-  } while ( (new Date()).getTime() - start < minEnemyTime);
+  var newBest = this.search(depth, -10000, 10000, 0 ,0, true);
+  if (newBest.enemy == -1) {
+    //break;
+  } else {
+    best = newBest;
+  }
   return best;
 }
 
