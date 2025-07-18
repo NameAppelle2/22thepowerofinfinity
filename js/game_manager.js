@@ -70,8 +70,7 @@ GameManager.prototype.move = function(direction) {
     if (result.moved) {
       this.grid.computerMove(this.ai);
     }
-  } else {
-    this.won = true;
+  } // Do nothing if 2048 is reached; don't set won
   }
 
   //console.log(this.grid.valueSum());
